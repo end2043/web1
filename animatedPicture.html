@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#imgBox {
+	width: 250px;
+}
+</style>
+<script type="text/javascript"
+		src="./jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+var interval = null;
+var imgs = ["1.jpg", "2.jpg"];
+var pos = 0;
+
+function play() {
+	$("#imgBox").fadeIn(1000).delay(1000).fadeOut(1000);
+	pos++;
+	if(pos == imgs.length) { 
+		pos = 0; 
+	}
+	document.getElementById("imgBox").src = imgs[pos];
+
+}
+
+$(document).ready(function() {
+	$("#imgBox").hide();
+	play();
+	interval = setInterval(play, 3000);
+	
+	$("#stopBtn").on("click",function(){
+		if(interval == null) {
+			interval = setInterval(play, 3000); 
+		} else {
+			clearInterval(interval); 
+			interval = null;
+		}
+	})
+})
+</script>
+</head>
+<body>
+<input type="button" value="pause"  id = "stopBtn"/>
+<br/>
+<img alt="이미지들" src="1.jpg" id="imgBox" />
+</body>
+</html>
